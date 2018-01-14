@@ -11,10 +11,14 @@ confinement: strict
 
 apps:
   minetest:
+    environment:
+      HOME: "$SNAP_USER_COMMON"
     command: launcher
     plugs: [desktop, desktop-legacy, x11, network, network-bind, unity7, opengl, pulseaudio, home]
 #    aliases: [minetest]
   minetestserver:
+    environment:
+      HOME: "$SNAP_USER_COMMON"
     command: launcher --server
     plugs: [desktop, desktop-legacy, x11, network, network-bind, unity7, opengl, pulseaudio, home]
 #    aliases: [minetestserver]
