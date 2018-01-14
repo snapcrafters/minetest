@@ -15,7 +15,7 @@ distributions.</p>
 
 ## Install
 
-    sudo snap install minetest --beta
+    sudo snap install minetest --candidate
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
