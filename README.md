@@ -19,9 +19,7 @@ distributions.</p>
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
-<!-- Uncomment and modify this when you have a screenshot
-![minetest](screenshot.png?raw=true "minetest")
--->
+![minetest](https://dashboard.snapcraft.io/site_media/appmedia/2018/01/Screenshot_from_2018-01-14_18-38-01.png "minetest")
 
 <p align="center">Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.png" align="top" width="24" /> with :gift_heart: by Snapcrafters</p>
 
