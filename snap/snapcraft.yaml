@@ -1,5 +1,6 @@
 name: minetest
-version: "0.4.16"
+version: stable
+version-script: git -C parts/minetest/build describe --tags
 summary: "Minetest"
 description: |
   Minetest is a minecraft-inspired game written from scratch and licensed
@@ -23,12 +24,28 @@ parts:
   minetestgame:
     source: https://github.com/minetest/minetest_game.git
     plugin: dump
-    source-branch: '0.4.16'
+    prepare: |
+      last_committed_tag="$(git describe --tags --abbrev=0)"
+      last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
+      # If the latest tag from the upstream project has not been released to
+      # beta, build that tag instead of master.
+      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
+        git fetch
+        git checkout "${last_committed_tag}"
+      fi    
     organize:
       '*': 'share/minetest/games/minetest_game/'
   minetest:
     source: https://github.com/minetest/minetest.git
-    source-branch: '0.4.16'
+    prepare: |
+      last_committed_tag="$(git describe --tags --abbrev=0)"
+      last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
+      # If the latest tag from the upstream project has not been released to
+      # beta, build that tag instead of master.
+      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
+        git fetch
+        git checkout "${last_committed_tag}"
+      fi
     plugin: cmake
     configflags: ["-DRUN_IN_PLACE=FALSE", "-DCMAKE_BUILD_TYPE=Release"]
     build-packages:
