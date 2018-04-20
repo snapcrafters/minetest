@@ -1,6 +1,6 @@
 name: minetest
 version: stable
-version-script: git -C parts/minetest/build describe --tags
+version-script: git -C parts/minetest/src describe --tags
 summary: "Minetest"
 description: |
   Minetest is a minecraft-inspired game written from scratch and licensed
