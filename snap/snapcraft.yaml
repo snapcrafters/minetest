@@ -32,6 +32,8 @@ parts:
       if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
         git fetch
         git checkout "${last_committed_tag}"
+        cd ../src
+        git checkout "${last_committed_tag}"
       fi    
     organize:
       '*': 'share/minetest/games/minetest_game/'
@@ -44,6 +46,9 @@ parts:
       # beta, build that tag instead of master.
       if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
         git fetch
+        git checkout "${last_committed_tag}"
+        # Needed  by the cmake plugin
+        cd ../src
         git checkout "${last_committed_tag}"
       fi
     plugin: cmake
