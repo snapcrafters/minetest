@@ -34,7 +34,8 @@ parts:
         git checkout "${last_committed_tag}"
         cd ../src
         git checkout "${last_committed_tag}"
-      fi    
+      fi 
+      snapcraftctl build
     organize:
       '*': 'share/minetest/games/minetest_game/'
   minetest:
@@ -51,6 +52,7 @@ parts:
         cd ../src
         git checkout "${last_committed_tag}"
       fi
+      snapcraftctl build
     plugin: cmake
     configflags: ["-DRUN_IN_PLACE=FALSE", "-DCMAKE_BUILD_TYPE=Release"]
     build-packages:
