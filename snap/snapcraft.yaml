@@ -9,13 +9,14 @@ description: |
   "infinite" map generator.
 grade: stable
 confinement: strict
+icon: snap/gui/minetest.svg
 
 apps:
   minetest:
     environment:
       HOME: "$SNAP_USER_COMMON"
     command: launcher
-    plugs: [desktop, desktop-legacy, x11, network, network-bind, unity7, opengl, pulseaudio, home]
+    plugs: [desktop, desktop-legacy, x11, network, network-bind, opengl, pulseaudio]
 
 parts:
   launcher:
