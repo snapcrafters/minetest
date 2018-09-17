@@ -1,6 +1,4 @@
 name: minetest
-version: stable
-version-script: git -C parts/minetest/src describe --tags
 summary: "Minetest"
 description: |
   Minetest is a minecraft-inspired game written from scratch and licensed
@@ -9,6 +7,7 @@ description: |
   "infinite" map generator.
 grade: stable
 confinement: strict
+adopt-info: minetest
 
 apps:
   minetest:
@@ -24,7 +23,8 @@ parts:
   minetestgame:
     source: https://github.com/minetest/minetest_game.git
     plugin: dump
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
       last_committed_tag="$(git tag | sort -V | grep ^0 | grep -v dev | tail -n 1)"
       last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
@@ -32,15 +32,15 @@ parts:
       if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
         git fetch
         git checkout "${last_committed_tag}"
-        cd ../src
-        git checkout "${last_committed_tag}"
       fi 
+  override-build: |
       snapcraftctl build
     organize:
       '*': 'share/minetest/games/minetest_game/'
   minetest:
     source: https://github.com/minetest/minetest.git
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
       last_committed_tag="$(git tag | sort -V | grep ^0 | grep -v dev | tail -n 1)"
       last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
@@ -52,6 +52,8 @@ parts:
         cd ../src
         git checkout "${last_committed_tag}"
       fi
+      snapcraftctl set-version "$(git describe --tags)"
+    override-build: |
       snapcraftctl build
     plugin: cmake
     configflags: ["-DRUN_IN_PLACE=FALSE", "-DCMAKE_BUILD_TYPE=Release"]
