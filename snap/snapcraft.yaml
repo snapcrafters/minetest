@@ -33,7 +33,7 @@ parts:
         git fetch
         git checkout "${last_committed_tag}"
       fi 
-  override-build: |
+    override-build: |
       snapcraftctl build
     organize:
       '*': 'share/minetest/games/minetest_game/'
