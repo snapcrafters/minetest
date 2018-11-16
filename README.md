@@ -1,10 +1,10 @@
 <h1 align="center">
   <img src="https://dashboard.snapcraft.io/site_media/appmedia/2018/01/minetest.png" alt="Minetest">
   <br />
-  [Minetest]
+  <a href="https://www.minetest.net">Minetest</a>
 </h1>
 
-<p align="center"><b>This is the snap for [Minetest]</b>, <i>"SA free, open source voxel game engine and game. Fully extendable. You are in control."</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
+<p align="center"><b>This is the snap for <a href="https://www.minetest.net">Minetest</a></b>, <i>"SA free, open source voxel game engine and game. Fully extendable. You are in control."</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
 distributions.</p>
 
 [![Snap Status](https://build.snapcraft.io/badge/snapcrafters/minetest.svg)](https://build.snapcraft.io/user/snapcrafters/minetest)
@@ -70,3 +70,5 @@ If you have any questions, [post in the Snapcraft forum](https://forum.snapcraft
 | :---: |
 | [Upstream Name](https://github.com/upstreamname) |
 -->
+
+[Minetest]: https://www.minetest.net
