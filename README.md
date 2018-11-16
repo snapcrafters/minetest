@@ -1,7 +1,7 @@
 <h1 align="center">
   <img src="https://dashboard.snapcraft.io/site_media/appmedia/2018/01/minetest.png" alt="Minetest">
   <br />
-  [Minetest](https://www.minetest.net)
+  <a href="https://www.minetest.net">Minetest</a>
 </h1>
 
 <p align="center"><b>This is the snap for <a href="https://www.minetest.net">Minetest</a></b>, <i>"SA free, open source voxel game engine and game. Fully extendable. You are in control."</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
