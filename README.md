@@ -70,3 +70,5 @@ If you have any questions, [post in the Snapcraft forum](https://forum.snapcraft
 | :---: |
 | [Upstream Name](https://github.com/upstreamname) |
 -->
+
+[Minetest]: https://www.minetest.net
