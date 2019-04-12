@@ -31,7 +31,7 @@ parts:
     plugin: dump
     override-pull: |
       snapcraftctl pull
-      last_committed_tag="$(git tag | sort -V | grep ^0 | grep -v dev | tail -n 1)"
+      last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
       last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
       # beta, build that tag instead of master.
@@ -47,7 +47,7 @@ parts:
     source: https://github.com/minetest/minetest.git
     override-pull: |
       snapcraftctl pull
-      last_committed_tag="$(git tag | sort -V | grep ^0 | grep -v dev | tail -n 1)"
+      last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
       last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
       # beta, build that tag instead of master.
