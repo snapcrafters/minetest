@@ -9,6 +9,7 @@ grade: stable
 confinement: strict
 icon: snap/gui/minetest.svg
 adopt-info: minetest
+base: core18
 
 architectures:
   - build-on: armhf
@@ -109,3 +110,6 @@ parts:
       - libxdamage1
       - libx11-6
       - libx11-xcb1
+      - libfreetype6
+      - libirrlicht1.8
+      - libpng16-16
