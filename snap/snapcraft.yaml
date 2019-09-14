@@ -9,6 +9,7 @@ grade: stable
 confinement: strict
 icon: snap/gui/minetest.svg
 adopt-info: minetest
+base: core18
 
 architectures:
   - build-on: armhf
