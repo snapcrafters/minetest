@@ -10,6 +10,7 @@ confinement: strict
 icon: snap/gui/minetest.svg
 adopt-info: minetest
 base: core18
+compression: lzo
 
 architectures:
   - build-on: armhf
