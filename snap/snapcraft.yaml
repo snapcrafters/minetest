@@ -22,7 +22,7 @@ apps:
     environment:
       HOME: "$SNAP_USER_COMMON"
     command: launcher
-    plugs: [desktop, desktop-legacy, x11, network, network-bind, opengl, pulseaudio, home, removable-media]
+    plugs: [desktop, desktop-legacy, x11, network, network-bind, opengl, audio-playback, home, removable-media]
 
 parts:
   launcher:
