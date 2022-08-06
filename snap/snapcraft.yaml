@@ -26,8 +26,9 @@ apps:
 
 parts:
   launcher:
-    source: snap/scripts
+    source: scripts
     plugin: dump
+
   minetestgame:
     source: https://github.com/minetest/minetest_game.git
     plugin: dump
@@ -40,7 +41,7 @@ parts:
       if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
         git fetch
         git checkout "${last_committed_tag}"
-      fi 
+      fi
     override-build: |
       snapcraftctl build
     organize:
