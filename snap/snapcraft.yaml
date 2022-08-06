@@ -29,6 +29,21 @@ parts:
     source: scripts
     plugin: dump
 
+  irrlicht:
+    source: https://github.com/minetest/irrlicht.git
+    plugin: cmake
+    configflags:
+      - -DBUILD_SHARED_LIBS=OFF
+    build-packages:
+      - libpng-dev
+      - libjpeg-dev
+      - libx11-dev
+      - libxi-dev
+      - libglu1-mesa-dev
+      - zlib1g-dev
+    prime:
+      - -*
+
   minetestgame:
     source: https://github.com/minetest/minetest_game.git
     plugin: dump
@@ -47,7 +62,9 @@ parts:
     organize:
       '*': 'share/minetest/games/minetest_game/'
   minetest:
+    plugin: cmake
     source: https://github.com/minetest/minetest.git
+    after: [ irrlicht ]
     override-pull: |
       snapcraftctl pull
       last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
@@ -64,7 +81,6 @@ parts:
       snapcraftctl set-version "$(git describe --tags)"
     override-build: |
       snapcraftctl build
-    plugin: cmake
     configflags: ["-DRUN_IN_PLACE=FALSE", "-DCMAKE_BUILD_TYPE=Release"]
     build-packages:
       - cmake
@@ -76,7 +92,6 @@ parts:
       - libcurl4-gnutls-dev
       - libfreetype6-dev
       - libglu1-mesa-dev
-      - libirrlicht-dev
       - libjpeg-dev
       - libjsoncpp-dev
       - libleveldb-dev
@@ -88,6 +103,7 @@ parts:
       - libsqlite3-dev
       - libvorbis-dev
       - libx11-dev
+      - libzstd-dev
       - zlib1g-dev
     stage-packages:
       - libgl1-mesa-dri
@@ -112,6 +128,8 @@ parts:
       - libxdamage1
       - libx11-6
       - libx11-xcb1
+      - libzstd1
       - libfreetype6
-      - libirrlicht1.8
       - libpng16-16
+      - libjsoncpp1
+      - libxi6
