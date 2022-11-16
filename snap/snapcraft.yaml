@@ -83,8 +83,9 @@ parts:
       - libcurl4-gnutls-dev
       - libfreetype6-dev
       - libglu1-mesa-dev
-      - libirrlicht-dev
+      - libgmp-dev
       - libjpeg-dev
+      - libjsoncpp-dev
       - libleveldb-dev
       - libluajit-5.1-dev
       - libogg-dev
@@ -93,13 +94,17 @@ parts:
       - libpulse-dev
       - libsqlite3-dev
       - libvorbis-dev
+      - libxi-dev
       - libx11-dev
+      - libzstd-dev
       - zlib1g-dev
     stage-packages:
       - libgl1-mesa-dri
       - libpulse0
       - libcurl3-gnutls
       - libgl1-mesa-glx
+      - libgmp10
+      - libjsoncpp25
       - libxshmfence1
       - libxcb-sync1
       - libxcb-present0
@@ -116,6 +121,7 @@ parts:
       - libxfixes3
       - libxext6
       - libxdamage1
+      - libxi6
       - libx11-6
       - libx11-xcb1
       - libfreetype6
