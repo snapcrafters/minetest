@@ -126,3 +126,4 @@ parts:
       - libx11-xcb1
       - libfreetype6
       - libpng16-16
+      - libzstd1
