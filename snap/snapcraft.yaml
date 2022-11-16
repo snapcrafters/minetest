@@ -1,17 +1,24 @@
 name: minetest
-summary: "Minetest"
+title: Minetest
+summary: Open source voxel game engine
 description: |
-  Minetest is a minecraft-inspired game written from scratch and licensed
-  under the LGPL (version 2.1 or later). It supports both survival and
-  creative modes along with multiplayer support, dynamic lighting, and an
-  "infinite" map generator.
-grade: stable
-confinement: strict
+  Minetest is a minecraft-inspired game written from scratch and licensed under the LGPL (version 2.1 or later). It supports both survival and creative modes along with multiplayer support, dynamic lighting, and an "infinite" map generator.
+
+  **Authors**
+
+  This snap package is maintained by the Snapcrafters community. It is not necessarily endorsed or officially supported by the developers of the application itself.
+license: LGPL-2.1-or-later
+website: https://www.minetest.net/
+contact: https://github.com/snapcrafters/minetest/issues
+issues: https://github.com/snapcrafters/minetest/issues
+source-code: https://github.com/snapcrafters/minetest
 icon: snap/gui/minetest.svg
 adopt-info: minetest
+
 base: core18
 compression: lzo
-
+grade: stable
+confinement: strict
 architectures:
   - build-on: armhf
   - build-on: i386
@@ -61,6 +68,7 @@ parts:
       snapcraftctl build
     organize:
       '*': 'share/minetest/games/minetest_game/'
+
   minetest:
     plugin: cmake
     source: https://github.com/minetest/minetest.git
