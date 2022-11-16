@@ -38,6 +38,7 @@ parts:
 
   irrlicht:
     source: https://github.com/minetest/irrlicht.git
+    source-tag: 1.9.0mt8 # must be updated to match whatever a specific minetest version requires
     plugin: cmake
     configflags:
       - -DBUILD_SHARED_LIBS=OFF
