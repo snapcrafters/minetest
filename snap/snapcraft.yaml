@@ -15,7 +15,7 @@ source-code: https://github.com/snapcrafters/minetest
 icon: snap/gui/minetest.svg
 adopt-info: minetest
 
-base: core18
+base: core22
 compression: lzo
 grade: stable
 confinement: strict
@@ -36,27 +36,11 @@ parts:
     source: scripts
     plugin: dump
 
-  irrlicht:
-    source: https://github.com/minetest/irrlicht.git
-    source-tag: 1.9.0mt13 # must be updated to match whatever a specific minetest version requires
-    plugin: cmake
-    configflags:
-      - -DBUILD_SHARED_LIBS=OFF
-    build-packages:
-      - libpng-dev
-      - libjpeg-dev
-      - libx11-dev
-      - libxi-dev
-      - libglu1-mesa-dev
-      - zlib1g-dev
-    prime:
-      - -*
-
   minetestgame:
     source: https://github.com/minetest/minetest_game.git
     plugin: dump
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
       last_released_tag="$(snap info minetest | awk '$1 == "latest/beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
@@ -66,16 +50,19 @@ parts:
         git checkout "${last_committed_tag}"
       fi
     override-build: |
-      snapcraftctl build
+      craftctl default
     organize:
       '*': 'share/minetest/games/minetest_game/'
 
   minetest:
     plugin: cmake
     source: https://github.com/minetest/minetest.git
-    after: [ irrlicht ]
+    cmake-parameters:
+      - -DRUN_IN_PLACE=FALSE
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
     override-pull: |
-      snapcraftctl pull
+      craftctl default
       last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
       last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
       # If the latest tag from the upstream project has not been released to
@@ -87,10 +74,8 @@ parts:
         cd ../src
         git checkout "${last_committed_tag}"
       fi
-      snapcraftctl set-version "$(git describe --tags)"
-    override-build: |
-      snapcraftctl build
-    configflags: ["-DRUN_IN_PLACE=FALSE", "-DCMAKE_BUILD_TYPE=Release"]
+      craftctl set version="$(git describe --tags)"
+      git clone --depth=1 --branch=1.9.0mt13 https://github.com/minetest/irrlicht lib/irrlichtmt
     build-packages:
       - cmake
       - gcc
@@ -109,6 +94,7 @@ parts:
       - libopenal-dev
       - libpng-dev
       - libpulse-dev
+      - libsdl2-dev
       - libsqlite3-dev
       - libvorbis-dev
       - libx11-dev
@@ -128,8 +114,9 @@ parts:
       - libvorbisfile3
       - libsnappy1v5
       - libopenal1
+      - libopengl0
       - libluajit-5.1-2
-      - libleveldb1v5
+      - libleveldb1d
       - libjpeg-turbo8
       - libxxf86vm1
       - libxfixes3
@@ -140,5 +127,5 @@ parts:
       - libzstd1
       - libfreetype6
       - libpng16-16
-      - libjsoncpp1
+      - libjsoncpp25
       - libxi6

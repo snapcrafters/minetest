@@ -37,4 +37,4 @@ if [ ! -e "$SNAP_USER_DATA/.minetest" ]; then
     ln -s . "$SNAP_USER_DATA/.minetest"
 fi
 
-exec "$SNAP/bin/minetest" "$@"
+exec "$SNAP/usr/bin/minetest" "$@"
