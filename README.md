@@ -16,7 +16,7 @@
 ## Install
 
 ```shell
-snap install minetest --classic
+snap install minetest
 ```
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
