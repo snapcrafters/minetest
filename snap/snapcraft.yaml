@@ -29,19 +29,24 @@ architectures:
 
 apps:
   minetest:
+    extensions: [gnome]
     environment:
       HOME: "$SNAP_USER_COMMON"
+      DISABLE_WAYLAND: 1
     command: bin/launcher
     plugs:
       - audio-playback
       - desktop
       - desktop-legacy
+      - joystick
       - home
       - network
       - network-bind
       - opengl
       - pulseaudio
       - removable-media
+      - screen-inhibit-control
+      - wayland
       - x11
 
 parts:
