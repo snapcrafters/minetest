@@ -1,5 +1,6 @@
 name: minetest
-title: Minetest
+version: 5.8.0
+
 summary: Open source voxel game engine
 description: |
   Minetest is a minecraft-inspired game written from scratch and licensed under the LGPL (version 2.1 or later). It supports both survival and creative modes along with multiplayer support, dynamic lighting, and an "infinite" map generator.
@@ -7,79 +8,68 @@ description: |
   **Authors**
 
   This snap package is maintained by the Snapcrafters community. It is not necessarily endorsed or officially supported by the developers of the application itself.
+
 license: LGPL-2.1-or-later
 website: https://www.minetest.net/
 contact: https://github.com/snapcrafters/minetest/issues
 issues: https://github.com/snapcrafters/minetest/issues
 source-code: https://github.com/snapcrafters/minetest
 icon: snap/gui/minetest.svg
-adopt-info: minetest
 
 base: core22
 compression: lzo
 grade: stable
 confinement: strict
+
 architectures:
+  - build-on: amd64
   - build-on: armhf
   - build-on: i386
-  - build-on: amd64
+  - build-on: arm64
 
 apps:
   minetest:
+    extensions: [gnome]
     environment:
       HOME: "$SNAP_USER_COMMON"
-    command: launcher
-    plugs: [desktop, desktop-legacy, x11, network, network-bind, opengl, pulseaudio, home, removable-media]
+      DISABLE_WAYLAND: 1
+    command: bin/launcher
+    plugs:
+      - audio-playback
+      - desktop
+      - desktop-legacy
+      - joystick
+      - home
+      - network
+      - network-bind
+      - opengl
+      - pulseaudio
+      - removable-media
+      - screen-inhibit-control
+      - wayland
+      - x11
 
 parts:
   launcher:
-    source: scripts
     plugin: dump
-
-  minetestgame:
-    source: https://github.com/minetest/minetest_game.git
-    plugin: dump
-    override-pull: |
-      craftctl default
-      last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
-      last_released_tag="$(snap info minetest | awk '$1 == "latest/beta:" { print $2 }')"
-      # If the latest tag from the upstream project has not been released to
-      # beta, build that tag instead of master.
-      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
-        git fetch
-        git checkout "${last_committed_tag}"
-      fi
-    override-build: |
-      craftctl default
-    organize:
-      '*': 'share/minetest/games/minetest_game/'
+    source: ./snap/local
+    source-type: local
 
   minetest:
     plugin: cmake
     source: https://github.com/minetest/minetest.git
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
     cmake-parameters:
-      - -DRUN_IN_PLACE=FALSE
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DRUN_IN_PLACE=FALSE
     override-pull: |
       craftctl default
-      last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
-      last_released_tag="$(snap info minetest | awk '$1 == "beta:" { print $2 }')"
-      # If the latest tag from the upstream project has not been released to
-      # beta, build that tag instead of master.
-      if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
-        git fetch
-        git checkout "${last_committed_tag}"
-        # Needed  by the cmake plugin
-        cd ../src
-        git checkout "${last_committed_tag}"
-      fi
-      craftctl set version="$(git describe --tags)"
       git clone --depth=1 --branch=1.9.0mt13 https://github.com/minetest/irrlicht lib/irrlichtmt
     build-packages:
       - cmake
-      - gcc
       - g++
+      - gcc
       - gettext
       - imagemagick
       - libbz2-dev
@@ -101,31 +91,31 @@ parts:
       - libzstd-dev
       - zlib1g-dev
     stage-packages:
-      - libgl1-mesa-dri
-      - libpulse0
       - libcurl3-gnutls
+      - libfreetype6
+      - libgl1-mesa-dri
       - libgl1-mesa-glx
-      - libxshmfence1
-      - libxcb-sync1
-      - libxcb-present0
-      - libxcb-glx0
-      - libxcb-dri3-0
-      - libxcb-dri2-0
-      - libvorbisfile3
-      - libsnappy1v5
+      - libjpeg-turbo8
+      - libjsoncpp25
+      - libleveldb1d
+      - libluajit-5.1-2
       - libopenal1
       - libopengl0
-      - libluajit-5.1-2
-      - libleveldb1d
-      - libjpeg-turbo8
-      - libxxf86vm1
-      - libxfixes3
-      - libxext6
-      - libxdamage1
+      - libpng16-16
+      - libpulse0
+      - libsnappy1v5
+      - libvorbisfile3
       - libx11-6
       - libx11-xcb1
-      - libzstd1
-      - libfreetype6
-      - libpng16-16
-      - libjsoncpp25
+      - libxcb-dri2-0
+      - libxcb-dri3-0
+      - libxcb-glx0
+      - libxcb-present0
+      - libxcb-sync1
+      - libxdamage1
+      - libxext6
+      - libxfixes3
       - libxi6
+      - libxshmfence1
+      - libxxf86vm1
+      - libzstd1

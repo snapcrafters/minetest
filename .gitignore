@@ -2,3 +2,6 @@
 parts
 stage
 prime
+#snapcraft remote-build stuff
+*.snap
+minetest_*.txt
