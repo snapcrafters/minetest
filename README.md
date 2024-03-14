@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="snap/minetest.svg" alt="Minetest">
+  <img src="snap/gui/minetest.svg" alt="Minetest">
 </h1>
 
 <p align="center"><b>This is the snap for Minetest</b>. It is a community-maintained package to easily install Minetest on Ubuntu, Fedora, Debian and other major Linux distributions. It is available in the Snap Store, Ubuntu Software, and a number of other applications.</p>
@@ -22,6 +22,8 @@ snap install minetest --classic
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
 <p align="center">Published for <img src="https://raw.githubusercontent.com/anythingcodes/slack-emoji-for-techies/gh-pages/emoji/tux.png" align="top" width="24" /> with :gift_heart: by Snapcrafters</p>
+
+![minetest](https://dashboard.snapcraft.io/site_media/appmedia/2018/01/Screenshot_from_2018-01-14_18-38-01.png "minetest")
 
 ## How to contribute to this snap
 
