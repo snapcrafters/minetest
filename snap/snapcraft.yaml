@@ -50,13 +50,6 @@ parts:
     source: ./snap/local
     source-type: local
 
-  minetestgame:
-    source: https://github.com/minetest/minetest_game.git
-    source-tag: $SNAPCRAFT_PROJECT_VERSION
-    plugin: dump
-    organize:
-      "*": "share/minetest/games/minetest_game/"
-
   minetest:
     plugin: cmake
     source: https://github.com/minetest/minetest.git
